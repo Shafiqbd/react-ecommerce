@@ -18,7 +18,11 @@ const Home = () => {
 
   return (
     <Container>
-      {productList.length === 0 ? <Loader>Loading...</Loader> : <Product productList={productList} />}
+      {productList.length === 0 ? (
+        <Loader>Loading...</Loader>
+      ) : (
+        <Product productList={productList} setProductList={setProductList} />
+      )}
     </Container>
   );
 };

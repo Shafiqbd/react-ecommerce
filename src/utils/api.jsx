@@ -17,3 +17,13 @@ export const getProductDetails = async (id) => {
     throw new Error(err);
   }
 };
+
+export const getProductSorting = async (sorting) => {
+  try {
+    debugger;
+    const { data } = await axios.get(`https://fakestoreapi.com/products?sort=${sorting}`);
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};

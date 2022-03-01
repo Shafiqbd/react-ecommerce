@@ -1,5 +1,11 @@
+import { TextField } from "@mui/material";
+
 const SearchProduct = () => {
-  return (  );
-}
- 
+  return (
+    <div>
+      <TextField id="outlined-basic" label="Search" variant="outlined" fullWidth />
+    </div>
+  );
+};
+
 export default SearchProduct;
