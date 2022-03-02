@@ -6,13 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
 import styled from "styled-components";
-import { getProductDetails, getProductSorting } from "../utils/api";
+import { getCategoryByroduct, getProductDetails, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
 
 const Title = styled.h1`
   margin: 30px 0px;
-  width: 20%;
+  width: 50%;
 `;
 const Loader = styled.h1`
   display: flex;
@@ -34,7 +34,7 @@ const ProductTitleFilter = styled.div`
     width: 20%;
   }
   & .product_search {
-    width: 60%;
+    width: 30%;
     padding: 0 20px;
   }
 `;
@@ -59,12 +59,18 @@ const ProductItem = ({ productList, setProductDetails, setProductList }) => {
       setProductList(productData);
     }
   };
+  const getCategoryWiseProduct = async (category) => {
+    const productData = await getCategoryByroduct(category);
+    if (productData) {
+      setProductList(productData);
+    }
+  };
   return (
     <ProductWrap>
       <ProductTitleFilter>
         <Title>Product List</Title>
         <div className="product_search">
-          <SearchProduct />
+          <SearchProduct getCategoryWiseProduct={getCategoryWiseProduct} />
         </div>
         <div className="product_filter">
           <SortProduct getSortByProduct={getSortByProduct} />

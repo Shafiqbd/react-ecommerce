@@ -20,8 +20,24 @@ export const getProductDetails = async (id) => {
 
 export const getProductSorting = async (sorting) => {
   try {
-    debugger;
     const { data } = await axios.get(`https://fakestoreapi.com/products?sort=${sorting}`);
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export const getAllCategory = async () => {
+  try {
+    const { data } = await axios.get(`https://fakestoreapi.com/products/categories`);
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export const getCategoryByroduct = async (category) => {
+  try {
+    debugger;
+    const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
     return data;
   } catch (err) {
     throw new Error(err);
