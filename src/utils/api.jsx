@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const getAllProduct = async () => {
   try {
-    const { data } = await axios.get("https://fakestoreapi.com/products");
+    const { data } = await axios.get("https://fakestoreapi.com/products?sort=asc");
     return data;
   } catch (err) {
     throw new Error(err);
@@ -36,7 +36,6 @@ export const getAllCategory = async () => {
 };
 export const getCategoryByroduct = async (category) => {
   try {
-    debugger;
     const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
     return data;
   } catch (err) {
