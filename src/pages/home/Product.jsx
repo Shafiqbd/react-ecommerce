@@ -26,6 +26,7 @@ const CustGrid = styled(Grid)`
 `;
 const Product = ({ productList, setProductList }) => {
   const [productDetails, setProductDetails] = useState(null);
+  const [index, setIndex] = useState(null);
 
   return (
     <Container>
@@ -35,9 +36,16 @@ const Product = ({ productList, setProductList }) => {
           setProductList={setProductList}
           productList={productList}
           setProductDetails={setProductDetails}
+          setIndex={setIndex}
+          index={index}
         />
       ) : productList.length > 0 ? (
-        <ProductItem productList={productList} setProductList={setProductList} setProductDetails={setProductDetails} />
+        <ProductItem
+          productList={productList}
+          setProductList={setProductList}
+          setProductDetails={setProductDetails}
+          setIndex={setIndex}
+        />
       ) : (
         <Loader>Loading...</Loader>
       )}

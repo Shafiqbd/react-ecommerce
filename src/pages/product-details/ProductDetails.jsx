@@ -58,9 +58,10 @@ const ActionWrapper = styled.div`
   justify-content: space-between;
 `;
 const ButtonContent = styled.div``;
-const ProductDetails = ({ productDetails, setProductDetails, setProductList, productList }) => {
+const ProductDetails = ({ productDetails, setProductDetails, setProductList, productList, index, setIndex }) => {
   const back = () => {
     setProductDetails(null);
+    setIndex(null);
   };
   return (
     <ProductDetailsWrap>
@@ -77,6 +78,7 @@ const ProductDetails = ({ productDetails, setProductDetails, setProductList, pro
             productList={productList}
             id={productDetails.id}
             setProductDetails={setProductDetails}
+            index={index}
           />
         )}
       </ActionWrapper>

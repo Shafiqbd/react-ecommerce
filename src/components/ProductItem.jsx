@@ -43,12 +43,13 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const ProductItem = ({ productList, setProductDetails, setProductList }) => {
-  const onClickProductDetails = async (id) => {
+const ProductItem = ({ productList, setProductDetails, setProductList, setIndex }) => {
+  const onClickProductDetails = async (id, i) => {
     const product = await getProductDetails(id);
     console.log("product", product);
     if (product) {
       setProductDetails(product);
+      setIndex(i);
     }
   };
   const getSortByProduct = async (sorting) => {
@@ -79,7 +80,7 @@ const ProductItem = ({ productList, setProductDetails, setProductList }) => {
 
       <Grid container spacing={4}>
         {productList.map((data, index) => (
-          <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id)}>
+          <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
             <Card style={{ padding: "15px" }}>
               <p>{data.category}</p>
               <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
