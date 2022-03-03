@@ -6,7 +6,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
 import styled from "styled-components";
-import { getProductDetails, getProductSorting } from "../utils/api";
+import { getCategoryByroduct, getProductDetails, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
 
@@ -59,12 +59,18 @@ const ProductItem = ({ productList, setProductDetails, setProductList }) => {
       setProductList(productData);
     }
   };
+  const getCategoryWiseProduct = async (category) => {
+    const productData = await getCategoryByroduct(category);
+    if (productData) {
+      setProductList(productData);
+    }
+  };
   return (
     <ProductWrap>
       <ProductTitleFilter>
         <Title>Product List</Title>
         <div className="product_search">
-          <SearchProduct />
+          <SearchProduct getCategoryWiseProduct={getCategoryWiseProduct} />
         </div>
         <div className="product_filter">
           <SortProduct getSortByProduct={getSortByProduct} />
@@ -75,6 +81,7 @@ const ProductItem = ({ productList, setProductDetails, setProductList }) => {
         {productList.map((data, index) => (
           <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id)}>
             <Card style={{ padding: "15px" }}>
+              <p>{data.category}</p>
               <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
               <CardHeader
                 avatar={
