@@ -17,7 +17,8 @@ export default function Action({ id, setProductDetails, productList, setProductL
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const OnClickdeleteProduct = async (id) => {
+  const OnClickdeleteProduct = async () => {
+    debugger;
     await deleteProduct(id);
     if (id) {
       productList.splice(id, 1);
