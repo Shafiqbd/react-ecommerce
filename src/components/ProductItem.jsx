@@ -12,7 +12,7 @@ import SortProduct from "./SortProduct";
 
 const Title = styled.h1`
   margin: 30px 0px;
-  width: 20%;
+  width: 100%;
 `;
 const Loader = styled.h1`
   display: flex;
@@ -31,10 +31,10 @@ const ProductTitleFilter = styled.div`
   align-items: center;
   justify-content: space-between;
   & .product_filter {
-    width: 20%;
+    width: 30%;
   }
   & .product_search {
-    width: 60%;
+    width: 70%;
     padding: 0 20px;
   }
 `;

@@ -9,12 +9,12 @@ const SortProduct = ({ getSortByProduct }) => {
   };
   return (
     <FormControl fullWidth>
-      <InputLabel id="demo-simple-select-label">Sort by Asc</InputLabel>
+      <InputLabel id="demo-simple-select-label">Sorting</InputLabel>
       <Select
         labelId="demo-simple-select-label"
         id="demo-simple-select"
         value={sorting}
-        label="Sort by Asc"
+        label="Sort"
         onChange={(e) => {
           handleChange(e.target.value);
           getSortByProduct(e.target.value);

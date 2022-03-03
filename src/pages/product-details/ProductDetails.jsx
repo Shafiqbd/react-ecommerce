@@ -1,6 +1,7 @@
 import { Button, Card, Grid } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
+import Action from "./Action";
 
 const Title = styled.h2`
   margin: 0;
@@ -36,18 +37,34 @@ const TitleWrap = styled.div`
   align-items: center;
   margin: 30px 0px;
 `;
-const ProductDetails = ({ productDetails, setProductDetails }) => {
+const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const ProductDetails = ({ productDetails, setProductDetails, setProductList, productList }) => {
+  console.log("detalis", productDetails.id);
   const back = () => {
     setProductDetails(null);
   };
   return (
     <ProductDetailsWrap>
-      <TitleWrap>
-        <Button variant="contained" onClick={back}>
-          Back
-        </Button>
-        <Title>Product Details</Title>
-      </TitleWrap>
+      <ActionWrapper>
+        <TitleWrap>
+          <Button variant="contained" onClick={back}>
+            Back
+          </Button>
+          <Title>Product Details</Title>
+        </TitleWrap>
+        {productDetails && (
+          <Action
+            setProductList={setProductList}
+            productList={productList}
+            id={productDetails.id}
+            setProductDetails={setProductDetails}
+          />
+        )}
+      </ActionWrapper>
 
       <Card style={{ padding: "15px" }}>
         {productDetails ? (

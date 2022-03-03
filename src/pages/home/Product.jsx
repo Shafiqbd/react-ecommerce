@@ -30,7 +30,12 @@ const Product = ({ productList, setProductList }) => {
   return (
     <Container>
       {productDetails ? (
-        <ProductDetails productDetails={productDetails} setProductDetails={setProductDetails} />
+        <ProductDetails
+          productDetails={productDetails}
+          setProductList={setProductList}
+          productList={productList}
+          setProductDetails={setProductDetails}
+        />
       ) : productList.length > 0 ? (
         <ProductItem productList={productList} setProductList={setProductList} setProductDetails={setProductDetails} />
       ) : (

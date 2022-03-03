@@ -27,3 +27,12 @@ export const getProductSorting = async (sorting) => {
     throw new Error(err);
   }
 };
+
+export const deleteProduct = async (id) => {
+  try {
+    await axios.delete(`https://fakestoreapi.com/products/${id}`);
+    console.log("delete:");
+  } catch (err) {
+    throw new Error(err);
+  }
+};
