@@ -82,7 +82,7 @@ const ProductItem = ({ productList, setProductDetails, setProductList, setIndex 
         {productList.map((data, index) => (
           <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
             <Card style={{ padding: "15px" }}>
-              <p>{data.category}</p>
+              {/* <p>{data.category}</p> */}
               <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
               <CardHeader
                 avatar={
