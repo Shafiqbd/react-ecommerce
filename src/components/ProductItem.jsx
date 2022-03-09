@@ -5,8 +5,9 @@ import CardHeader from "@mui/material/CardHeader";
 import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getCategoryByroduct, getProductDetails, getProductSorting } from "../utils/api";
+import { getCategoryByroduct, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
 
@@ -43,13 +44,15 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const ProductItem = ({ productList, setProductDetails, setProductList, setIndex }) => {
+const ProductItem = ({ productList, setProductList }) => {
+  const navigate = useNavigate();
   const onClickProductDetails = async (id, i) => {
-    const product = await getProductDetails(id);
-    console.log("product", product);
-    if (product) {
-      setProductDetails(product);
-      setIndex(i);
+    if (id) {
+      let data = {
+        id: id,
+        index: i,
+      };
+      navigate(`/productdetails/${JSON.stringify(data)}`, { replace: true });
     }
   };
   const getSortByProduct = async (sorting) => {

@@ -1,7 +1,9 @@
-import { Button, Card, Grid, Rating } from "@mui/material";
-import React from "react";
+import { Button, Card, Container, Grid, Rating } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import ButtonStyle from "../../components/ButtonStyle";
+import { getProductDetails } from "../../utils/api";
 import Action from "./Action";
 
 const Title = styled.h2`
@@ -58,56 +60,66 @@ const ActionWrapper = styled.div`
   justify-content: space-between;
 `;
 const ButtonContent = styled.div``;
-const ProductDetails = ({ productDetails, setProductDetails, setProductList, productList, index, setIndex }) => {
+
+const ProductDetails = () => {
+  const [productDetails, setProductDetails] = useState(null);
+  const [indexData, setIndexData] = useState(null);
+  debugger;
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(async () => {
+    const paramData = JSON.parse(id);
+    const product = await getProductDetails(paramData.id);
+    if (product) {
+      setProductDetails(product);
+      setIndexData(paramData.index);
+    }
+  }, [id]);
+
   const back = () => {
-    setProductDetails(null);
-    setIndex(null);
+    // setProductDetails(null);
+    navigate("/productlist", { replace: true });
   };
   return (
-    <ProductDetailsWrap>
-      <ActionWrapper>
-        <TitleWrap>
-          <Button variant="contained" onClick={back}>
-            Back
-          </Button>
-          <Title>Product Details</Title>
-        </TitleWrap>
-        {productDetails && (
-          <Action
-            setProductList={setProductList}
-            productList={productList}
-            id={productDetails.id}
-            setProductDetails={setProductDetails}
-            index={index}
-          />
-        )}
-      </ActionWrapper>
+    <Container>
+      <ProductDetailsWrap>
+        <ActionWrapper>
+          <TitleWrap>
+            <Button variant="contained" onClick={back}>
+              Back
+            </Button>
+            <Title>Product Details</Title>
+          </TitleWrap>
+          {productDetails && <Action id={productDetails.id} index={indexData} />}
+        </ActionWrapper>
 
-      <Card style={{ padding: "15px" }}>
-        {productDetails ? (
-          <Grid container spacing={4}>
-            <Grid item md={6}>
-              <ImgContent>
-                <img src={productDetails.image} alt="" />
-              </ImgContent>
+        <Card style={{ padding: "15px" }}>
+          {productDetails ? (
+            <Grid container spacing={4}>
+              <Grid item md={6}>
+                <ImgContent>
+                  <img src={productDetails.image} alt="" />
+                </ImgContent>
+              </Grid>
+              <Grid item md={6}>
+                <h3> {productDetails.category}</h3>
+                <h1>{productDetails.title}</h1>
+                <RatingContent name="read-only" value={productDetails?.rating?.rate} readOnly />
+                <h4> {productDetails.price} BDT.</h4>
+                <p>{productDetails.description}</p>
+                <ButtonContent>
+                  <ButtonStyle btnName={"Add to Cart"} width={"140px"} margin_left={"0px"} back={""} />
+                  <ButtonStyle btnName={"Go to Cart"} width={"140px"} margin_left={"15px"} back={"bg"} />
+                </ButtonContent>
+              </Grid>
             </Grid>
-            <Grid item md={6}>
-              <h3> {productDetails.category}</h3>
-              <h1>{productDetails.title}</h1>
-              <RatingContent name="read-only" value={productDetails?.rating?.rate} readOnly />
-              <h4> {productDetails.price} BDT.</h4>
-              <p>{productDetails.description}</p>
-              <ButtonContent>
-                <ButtonStyle btnName={"Add to Cart"} width={"140px"} margin_left={"0px"} back={""} />
-                <ButtonStyle btnName={"Go to Cart"} width={"140px"} margin_left={"15px"} back={"bg"} />
-              </ButtonContent>
-            </Grid>
-          </Grid>
-        ) : (
-          <div>Loading...</div>
-        )}
-      </Card>
-    </ProductDetailsWrap>
+          ) : (
+            <div>Loading...</div>
+          )}
+        </Card>
+      </ProductDetailsWrap>
+    </Container>
   );
 };
 

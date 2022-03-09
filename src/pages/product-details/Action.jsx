@@ -2,17 +2,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IconButton } from "@mui/material";
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { deleteProduct } from "../../utils/api";
 
-export default function Action({ id, setProductDetails, productList, setProductList, index }) {
+export default function Action({ id, index }) {
   const OnClickdeleteProduct = async () => {
-    debugger;
-    await deleteProduct(id);
-    if (id) {
-      productList.splice(index, 1);
-      setProductList((productList) => [...productList]);
-    }
-    setProductDetails(null);
+    // debugger;
+    // await deleteProduct(id);
+    // if (id) {
+    //   productList.splice(index, 1);
+    //   setProductList((productList) => [...productList]);
+    // }
+    // setProductDetails(null);
   };
   const editProduct = () => {};
 
