@@ -1,12 +1,12 @@
-import { Grid } from "@mui/material";
+import { CardMedia, Grid } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import { red } from "@mui/material/colors";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import LoadImg from "../assets/load_img.jpg";
 import { getCategoryByroduct, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
@@ -86,7 +86,14 @@ const ProductItem = ({ productList, setProductList }) => {
           <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
             <Card style={{ padding: "15px" }}>
               {/* <p>{data.category}</p> */}
-              <CardMedia component="img" height="194" image={data.image} alt={data.title[0]} />
+              <CardMedia component="img" height="194" image={data.image || LoadImg} alt={data.title[0]} />
+              {/* <img
+                src={data.image}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "http://google.com/nothere.jpg";
+                }}
+              /> */}
               <CardHeader
                 avatar={
                   <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
