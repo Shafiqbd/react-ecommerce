@@ -1,8 +1,10 @@
 import { Button, Card, Container, Grid, Rating } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import ButtonStyle from "../../components/ButtonStyle";
+import { getProductByProductId, removeProductByProductId } from "../../redux/actions/products/productActions";
 import { getProductDetails } from "../../utils/api";
 import Action from "./Action";
 
@@ -62,23 +64,23 @@ const ActionWrapper = styled.div`
 const ButtonContent = styled.div``;
 
 const ProductDetails = () => {
-  const [productDetails, setProductDetails] = useState(null);
   const [indexData, setIndexData] = useState(null);
-  debugger;
   const { id } = useParams();
   const navigate = useNavigate();
+  const productDetails = useSelector((state) => state.product);
+  const dispatch = useDispatch();
 
   useEffect(async () => {
     const paramData = JSON.parse(id);
-    const product = await getProductDetails(paramData.id);
-    if (product) {
-      setProductDetails(product);
+    const detailsData = await getProductDetails(paramData.id);
+    if (detailsData) {
+      dispatch(getProductByProductId(detailsData));
       setIndexData(paramData.index);
     }
   }, [id]);
 
   const back = () => {
-    // setProductDetails(null);
+    dispatch(removeProductByProductId());
     navigate("/productlist", { replace: true });
   };
   return (

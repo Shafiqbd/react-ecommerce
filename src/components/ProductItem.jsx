@@ -4,9 +4,11 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import { red } from "@mui/material/colors";
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoadImg from "../assets/load_img.jpg";
+import { setProducts } from "../redux/actions/products/productActions";
 import { getCategoryByroduct, getProductSorting } from "../utils/api";
 import SearchProduct from "./SearchProduct";
 import SortProduct from "./SortProduct";
@@ -44,8 +46,9 @@ const CustGrid = styled(Grid)`
     cursor: pointer;
   }
 `;
-const ProductItem = ({ productList, setProductList }) => {
+const ProductItem = ({ productList }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const onClickProductDetails = async (id, i) => {
     if (id) {
       let data = {
@@ -57,16 +60,16 @@ const ProductItem = ({ productList, setProductList }) => {
   };
   const getSortByProduct = async (sorting) => {
     const productData = await getProductSorting(sorting);
-    console.log("product", productData);
     if (productData) {
-      // setProductDetails(product);
-      setProductList(productData);
+      dispatch(setProducts(productData));
+      // setProductList(productData);
     }
   };
   const getCategoryWiseProduct = async (category) => {
     const productData = await getCategoryByroduct(category);
     if (productData) {
-      setProductList(productData);
+      dispatch(setProducts(productData));
+      // setProductList(productData);
     }
   };
   return (
@@ -81,7 +84,7 @@ const ProductItem = ({ productList, setProductList }) => {
         </div>
       </ProductTitleFilter>
 
-      <Grid container spacing={4}>
+      <Grid container spacing={3}>
         {productList.map((data, index) => (
           <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
             <Card style={{ padding: "15px" }}>

@@ -1,7 +1,9 @@
 import { Container, Grid } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import ProductItem from "../../components/ProductItem";
+import { setProducts } from "../../redux/actions/products/productActions";
 import { getAllProduct } from "../../utils/api";
 
 const Title = styled.h1`
@@ -25,18 +27,17 @@ const CustGrid = styled(Grid)`
   }
 `;
 const Product = () => {
-  const [productList, setProductList] = useState([]);
+  const { products } = useSelector((state) => state.getAllProducts);
+  const dispatch = useDispatch();
+  const productList = products;
+
   useEffect(async () => {
-    setProductList(await getAllProduct());
+    dispatch(setProducts(await getAllProduct()));
   }, []);
 
   return (
     <Container>
-      {productList.length > 0 ? (
-        <ProductItem productList={productList} setProductList={setProductList} />
-      ) : (
-        <Loader>Loading...</Loader>
-      )}
+      {productList.length > 0 ? <ProductItem productList={productList} /> : <Loader>Loading...</Loader>}
     </Container>
   );
 };
