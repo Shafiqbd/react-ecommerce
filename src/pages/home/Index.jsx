@@ -10,11 +10,6 @@ const Home = () => {
   return (
     <Container>
       <h2>Welcome</h2>
-      {/* {productList.length === 0 ? (
-        <Loader>Loading...</Loader>
-      ) : (
-        <Product productList={productList} setProductList={setProductList} />
-      )} */}
     </Container>
   );
 };

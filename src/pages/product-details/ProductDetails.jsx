@@ -6,7 +6,6 @@ import styled from "styled-components";
 import ButtonStyle from "../../components/ButtonStyle";
 import { getProductByProductId, removeProductByProductId } from "../../redux/actions/products/productActions";
 import { getProductDetails } from "../../utils/api";
-import Action from "./Action";
 
 const Title = styled.h2`
   margin: 0;
@@ -93,7 +92,7 @@ const ProductDetails = () => {
             </Button>
             <Title>Product Details</Title>
           </TitleWrap>
-          {productDetails && <Action id={productDetails.id} index={indexData} />}
+          {/* {productDetails && <Action id={productDetails.id} index={indexData} />} */}
         </ActionWrapper>
 
         <Card style={{ padding: "15px" }}>

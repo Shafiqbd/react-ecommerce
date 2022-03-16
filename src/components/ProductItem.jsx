@@ -8,44 +8,30 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoadImg from "../assets/load_img.jpg";
-import { setProducts } from "../redux/actions/products/productActions";
-import { getCategoryByroduct, getProductSorting } from "../utils/api";
-import SearchProduct from "./SearchProduct";
-import SortProduct from "./SortProduct";
+import Action from "../pages/product-details/Action";
 
-const Title = styled.h1`
-  margin: 30px 0px;
-  width: 100%;
-`;
-const Loader = styled.h1`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-`;
-const ProductWrap = styled.div`
-  & span {
-    font-size: 22px;
-    font-weight: 700;
-  }
-`;
-const ProductTitleFilter = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  & .product_filter {
-    width: 30%;
-  }
-  & .product_search {
-    width: 70%;
-    padding: 0 20px;
-  }
-`;
 const CustGrid = styled(Grid)`
   &:hover {
     cursor: pointer;
   }
 `;
+const ActionWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 40px;
+  background: #fff;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  & .action_menu {
+    position: absolute;
+    z-index: 99;
+    right: 0px;
+  }
+`;
+
 const ProductItem = ({ productList }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -58,60 +44,33 @@ const ProductItem = ({ productList }) => {
       navigate(`/productdetails/${JSON.stringify(data)}`, { replace: true });
     }
   };
-  const getSortByProduct = async (sorting) => {
-    const productData = await getProductSorting(sorting);
-    if (productData) {
-      dispatch(setProducts(productData));
-      // setProductList(productData);
-    }
-  };
-  const getCategoryWiseProduct = async (category) => {
-    const productData = await getCategoryByroduct(category);
-    if (productData) {
-      dispatch(setProducts(productData));
-      // setProductList(productData);
-    }
-  };
-  return (
-    <ProductWrap>
-      <ProductTitleFilter>
-        <Title>Product List</Title>
-        <div className="product_search">
-          <SearchProduct getCategoryWiseProduct={getCategoryWiseProduct} />
-        </div>
-        <div className="product_filter">
-          <SortProduct getSortByProduct={getSortByProduct} />
-        </div>
-      </ProductTitleFilter>
 
-      <Grid container spacing={3}>
-        {productList.map((data, index) => (
-          <CustGrid item md={4} key={index} onClick={() => onClickProductDetails(data.id, index)}>
-            <Card style={{ padding: "15px" }}>
-              {/* <p>{data.category}</p> */}
-              <CardMedia component="img" height="194" image={data.image || LoadImg} alt={data.title[0]} />
-              {/* <img
-                src={data.image}
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = "http://google.com/nothere.jpg";
-                }}
-              /> */}
-              <CardHeader
-                avatar={
-                  <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                    {data.title[0]}
-                  </Avatar>
-                }
-                title={data.title.substr(1, 20) + "..."}
-                subheader={data.price + " " + "BDT"}
-              />
-              <p>{data.description.substr(1, 100) + "..."}</p>
-            </Card>
-          </CustGrid>
-        ))}
-      </Grid>
-    </ProductWrap>
+  return (
+    <Grid container spacing={3}>
+      {productList.map((data, index) => (
+        <CustGrid item md={4} key={index}>
+          <ActionWrapper>
+            <div className="action_menu">
+              <Action id={data.id} index={index} />
+            </div>
+          </ActionWrapper>
+          <Card style={{ padding: "15px" }} onClick={() => onClickProductDetails(data.id, index)}>
+            {/* <p>{data.category}</p> */}
+            <CardMedia component="img" height="194" image={data.image || LoadImg} alt={data.title[0]} />
+            <CardHeader
+              avatar={
+                <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                  {data.title[0]}
+                </Avatar>
+              }
+              title={data.title.substr(1, 20) + "..."}
+              subheader={data.price + " " + "BDT"}
+            />
+            <p>{data.description.substr(1, 100) + "..."}</p>
+          </Card>
+        </CustGrid>
+      ))}
+    </Grid>
   );
 };
 
