@@ -1,7 +1,7 @@
-import { ActionType } from "../../contants/action-type";
+import { SET_CATEGORY } from "../../contants/action-type";
 export const setCategory = (categorys) => {
   return {
-    type: ActionType.SET_CATEGORY,
+    type: SET_CATEGORY,
     payload: categorys,
   };
 };
