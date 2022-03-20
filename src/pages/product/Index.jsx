@@ -7,8 +7,7 @@ import styled from "styled-components";
 import ProductItem from "../../components/ProductItem";
 import SearchProduct from "../../components/SearchProduct";
 import SortProduct from "../../components/SortProduct";
-import { setProducts } from "../../redux/actions/products/productActions";
-import { getAllProduct, getCategoryByroduct, getProductSorting } from "../../utils/api";
+import { getAllProduct, getCategoryByProduct, getProductSorting } from "../../utils/api";
 
 const Title = styled.h1`
   margin: 30px 0px;
@@ -51,21 +50,15 @@ const Index = () => {
   const dispatch = useDispatch();
   const productList = products;
 
-  useEffect(async () => {
-    dispatch(setProducts(await getAllProduct()));
+  useEffect(() => {
+    dispatch(getAllProduct());
   }, []);
 
-  const getSortByProduct = async (sorting) => {
-    const productData = await getProductSorting(sorting);
-    if (productData) {
-      dispatch(setProducts(productData));
-    }
+  const getSortByProduct = (sorting) => {
+    dispatch(getProductSorting(sorting));
   };
-  const getCategoryWiseProduct = async (category) => {
-    const productData = await getCategoryByroduct(category);
-    if (productData) {
-      dispatch(setProducts(productData));
-    }
+  const getCategoryWiseProduct = (category) => {
+    dispatch(getCategoryByProduct(category));
   };
 
   const productPage = () => {
