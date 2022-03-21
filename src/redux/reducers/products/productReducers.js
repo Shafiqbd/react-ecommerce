@@ -1,6 +1,5 @@
-import { GET_PRODUCTS_BY_ID, REMOVE_PRODUCTS_BY_ID, SET_PRODUCTS } from "../../contants/action-type";
+import { INSERT_PRODUCTS } from "../../contants/action-type";
 const initialState = {
-  products: [],
   productData: {
     title: "",
     price: 0,
@@ -11,19 +10,8 @@ const initialState = {
 };
 export const productReducers = (state = initialState, { payload, type }) => {
   switch (type) {
-    case SET_PRODUCTS:
+    case INSERT_PRODUCTS:
       return { ...state, products: payload };
-
-    default:
-      return state;
-  }
-};
-export const productByIdReducers = (state = {}, { payload, type }) => {
-  switch (type) {
-    case GET_PRODUCTS_BY_ID:
-      return { ...state, ...payload };
-    case REMOVE_PRODUCTS_BY_ID:
-      return {};
 
     default:
       return state;

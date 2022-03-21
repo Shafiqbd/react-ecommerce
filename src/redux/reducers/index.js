@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import { cattegoryListReducers } from "./category/categoryReducers";
-import { productByIdReducers, productReducers } from "./products/productReducers";
+import { categoryListReducers } from "./category/categoryReducers";
+import { productByIdReducers, productListReducers } from "./products/productListReducers";
+import { productReducers } from "./products/productReducers";
 
 const reducers = combineReducers({
-  getAllProducts: productReducers,
+  getAllProducts: productListReducers,
   product: productByIdReducers,
-  getAllCategoryList: cattegoryListReducers,
+  getAllCategoryList: categoryListReducers,
+  insertProduct: productReducers,
 });
 export default reducers;

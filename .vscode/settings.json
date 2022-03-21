@@ -14,6 +14,19 @@
   "eslint.alwaysShowStatus": true,
   "javascript.validate.enable": false,
   "prettier.disableLanguages": ["javascript", "javascriptreact"],
+  "bracket-pair-colorizer-2.colors": ["Gold", "Orchid", "LightSkyBlue"],
+  "bracket-pair-colorizer-2.activeScopeCSS": [
+    "borderStyle : solid",
+    "borderWidth : 1px",
+    "borderColor : {color}",
+    "opacity: 0.5"
+  ],
+  "bracket-pair-colorizer-2.scopeLineCSS": [
+    "borderStyle : solid",
+    "borderWidth : 1px",
+    "borderColor : {color}",
+    "opacity: 0.5"
+  ],
   "bracketPairColorizer.colorMode": "Independent",
   "bracketPairColorizer.independentPairColors": [
     ["()", ["White"], "Red"],
