@@ -17,6 +17,7 @@ const ProductTitle = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
+
 const Product = () => {
   return (
     <Container>

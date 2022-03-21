@@ -12,10 +12,13 @@ export default function Action({ id, index }) {
   const productList = products;
 
   const OnClickdeleteProduct = async () => {
-    await deleteProduct(id);
-    if (id) {
+    debugger;
+    const deleteData = await deleteProduct(id);
+    if (deleteData) {
       productList.splice(index, 1);
       dispatch(setProducts(productList));
+    } else {
+      alert("Delete not Successfully!!");
     }
   };
   const editProduct = () => {};

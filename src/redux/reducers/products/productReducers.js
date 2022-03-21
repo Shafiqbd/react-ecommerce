@@ -1,6 +1,13 @@
 import { GET_PRODUCTS_BY_ID, REMOVE_PRODUCTS_BY_ID, SET_PRODUCTS } from "../../contants/action-type";
 const initialState = {
   products: [],
+  productData: {
+    title: "",
+    price: 0,
+    description: "",
+    image: "",
+    category: "",
+  },
 };
 export const productReducers = (state = initialState, { payload, type }) => {
   switch (type) {

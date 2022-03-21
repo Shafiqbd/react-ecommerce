@@ -35,9 +35,9 @@ export const getProductSorting = (sorting) => (dispatch) => {
 export const deleteProduct = async (id) => {
   try {
     await axios.delete(`https://fakestoreapi.com/products/${id}`);
-    console.log("delete:");
+    return true;
   } catch (err) {
-    throw new Error(err);
+    return false;
   }
 };
 

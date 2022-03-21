@@ -14,8 +14,6 @@ const SearchProduct = ({ getCategoryWiseProduct }) => {
   };
 
   useEffect(() => {
-    debugger;
-    console.log(categoryList);
     dispatch(getAllCategory());
   }, []);
 
