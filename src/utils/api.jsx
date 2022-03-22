@@ -1,32 +1,27 @@
 import axios from "axios";
-import { setCategory } from "../redux/actions/category/categoryActions";
-import { getProductByProductId, setProducts } from "../redux/actions/products/productActions";
 
-export const getAllProduct = () => (dispatch) => {
+export const getAllProduct = async () => {
   try {
-    axios.get("https://fakestoreapi.com/products?sort=asc").then((response) => {
-      dispatch(setProducts(response.data));
-    });
+    const { data } = await axios.get("https://fakestoreapi.com/products?sort=asc");
+    return data;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-export const getProductDetails = (id) => (dispatch) => {
+export const getProductDetails = async (id) => {
   try {
-    axios.get(`https://fakestoreapi.com/products/${id}`).then((response) => {
-      dispatch(getProductByProductId(response.data));
-    });
+    const { data } = await axios.get(`https://fakestoreapi.com/products/${id}`);
+    return data;
   } catch (err) {
     throw new Error(err);
   }
 };
 
-export const getProductSorting = (sorting) => (dispatch) => {
+export const getProductSorting = async (sorting) => {
   try {
-    axios.get(`https://fakestoreapi.com/products?sort=${sorting}`).then((response) => {
-      dispatch(setProducts(response.data));
-    });
+    const { data } = await axios.get(`https://fakestoreapi.com/products?sort=${sorting}`);
+    return data;
   } catch (err) {
     throw new Error(err);
   }
@@ -41,20 +36,35 @@ export const deleteProduct = async (id) => {
   }
 };
 
-export const getAllCategory = () => (dispatch) => {
+export const getAllCategory = async () => {
   try {
-    axios.get(`https://fakestoreapi.com/products/categories`).then((response) => {
-      dispatch(setCategory(response.data));
-    });
+    const { data } = await axios.get(`https://fakestoreapi.com/products/categories`);
+    return data;
   } catch (err) {
     throw new Error(err);
   }
 };
-export const getCategoryByProduct = (category) => (dispatch) => {
+export const getCategoryByProduct = async (category) => {
   try {
-    axios.get(`https://fakestoreapi.com/products/category/${category}`).then((response) => {
-      dispatch(setProducts(response.data));
-    });
+    const { data } = await axios.get(`https://fakestoreapi.com/products/category/${category}`);
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export const addProduct = async (product) => {
+  try {
+    const { data } = await axios.post("https://fakestoreapi.com/products", JSON.stringify(product));
+    return data;
+  } catch (err) {
+    throw new Error(err);
+  }
+};
+export const updateProduct = async (product, id) => {
+  try {
+    const { data } = await axios.patch(`https://fakestoreapi.com/products/${id}`, JSON.stringify(product));
+    return data;
+    console.log(data);
   } catch (err) {
     throw new Error(err);
   }

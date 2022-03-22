@@ -63,10 +63,10 @@ const ProductItem = ({ productList }) => {
                   {data.title[0]}
                 </Avatar>
               }
-              title={data.title.substr(1, 20) + "..."}
+              title={data.title.substr(0, 20) + "..."}
               subheader={data.price + " " + "BDT"}
             />
-            <p>{data.description.substr(1, 100) + "..."}</p>
+            <p>{data.description.substr(0, 100) + "..."}</p>
           </Card>
         </CustGrid>
       ))}

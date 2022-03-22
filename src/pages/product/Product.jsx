@@ -1,7 +1,9 @@
 import { Container } from "@mui/material";
 import React from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import AddProduct from "../../components/AddProduct";
+import EditProduct from "../../components/EditProduct";
 
 const Title = styled.h1`
   margin: 30px 0px;
@@ -19,6 +21,7 @@ const ProductTitle = styled.div`
 `;
 
 const Product = () => {
+  const { id } = useParams();
   return (
     <Container>
       <ProductWrap>
@@ -27,7 +30,7 @@ const Product = () => {
         </ProductTitle>
       </ProductWrap>
 
-      <AddProduct />
+      {id > 0 ? <EditProduct /> : <AddProduct />}
     </Container>
   );
 };

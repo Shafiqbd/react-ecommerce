@@ -7,7 +7,12 @@ import styled from "styled-components";
 import ProductItem from "../../components/ProductItem";
 import SearchProduct from "../../components/SearchProduct";
 import SortProduct from "../../components/SortProduct";
-import { getAllProduct, getCategoryByProduct, getProductSorting } from "../../utils/api";
+import {
+  getCategoryByProductList,
+  getSortingByProductList,
+  removeProductByProductId,
+  setProductsList,
+} from "../../redux/actions/products/productActions";
 
 const Title = styled.h1`
   margin: 30px 0px;
@@ -51,17 +56,18 @@ const Index = () => {
   const productList = products;
 
   useEffect(() => {
-    dispatch(getAllProduct());
+    dispatch(setProductsList());
   }, []);
 
   const getSortByProduct = (sorting) => {
-    dispatch(getProductSorting(sorting));
+    dispatch(getSortingByProductList(sorting));
   };
   const getCategoryWiseProduct = (category) => {
-    dispatch(getCategoryByProduct(category));
+    dispatch(getCategoryByProductList(category));
   };
 
   const productPage = () => {
+    dispatch(removeProductByProductId());
     navigate("/product", { replace: true });
   };
 

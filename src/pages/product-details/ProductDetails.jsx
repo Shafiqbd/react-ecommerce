@@ -4,8 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import ButtonStyle from "../../components/ButtonStyle";
-import { removeProductByProductId } from "../../redux/actions/products/productActions";
-import { getProductDetails } from "../../utils/api";
+import { getProductByProductId, removeProductByProductId } from "../../redux/actions/products/productActions";
 
 const Title = styled.h2`
   margin: 0;
@@ -66,14 +65,13 @@ const ProductDetails = () => {
   const [indexData, setIndexData] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
-  const productDetails = useSelector((state) => state.product);
+  const productDetails = useSelector((state) => state.getAllProducts.productData);
   const dispatch = useDispatch();
 
   useEffect(async () => {
     const paramData = JSON.parse(id);
-
     if (paramData.id) {
-      dispatch(getProductDetails(paramData.id));
+      dispatch(getProductByProductId(paramData.id));
       setIndexData(paramData.index);
     }
   }, [id]);
